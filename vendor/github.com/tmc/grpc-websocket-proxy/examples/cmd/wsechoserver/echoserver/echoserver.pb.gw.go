@@ -38,6 +38,9 @@ func request_EchoService_Echo_0(ctx context.Context, marshaler runtime.Marshaler
 	handleSend := func() error {
 		var protoReq EchoRequest
 		err = dec.Decode(&protoReq)
+		if err == io.EOF {
+			return err
+		}
 		if err != nil {
 			grpclog.Printf("Failed to decode request: %v", err)
 			return err
@@ -49,8 +52,11 @@ func request_EchoService_Echo_0(ctx context.Context, marshaler runtime.Marshaler
 		return nil
 	}
 	if err := handleSend(); err != nil {
-		if err := stream.CloseSend(); err != nil {
-			grpclog.Printf("Failed to terminate client stream: %v", err)
+		if cerr := stream.CloseSend(); cerr != nil {
+			grpclog.Printf("Failed to terminate client stream: %v", cerr)
+		}
+		if err == io.EOF {
+			return stream, metadata, nil
 		}
 		return nil, metadata, err
 	}
@@ -101,6 +107,9 @@ func request_EchoService_Heartbeats_0(ctx context.Context, marshaler runtime.Mar
 	handleSend := func() error {
 		var protoReq Empty
 		err = dec.Decode(&protoReq)
+		if err == io.EOF {
+			return err
+		}
 		if err != nil {
 			grpclog.Printf("Failed to decode request: %v", err)
 			return err
@@ -112,8 +121,11 @@ func request_EchoService_Heartbeats_0(ctx context.Context, marshaler runtime.Mar
 		return nil
 	}
 	if err := handleSend(); err != nil {
-		if err := stream.CloseSend(); err != nil {
-			grpclog.Printf("Failed to terminate client stream: %v", err)
+		if cerr := stream.CloseSend(); cerr != nil {
+			grpclog.Printf("Failed to terminate client stream: %v", cerr)
+		}
+		if err == io.EOF {
+			return stream, metadata, nil
 		}
 		return nil, metadata, err
 	}

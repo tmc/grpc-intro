@@ -12,9 +12,9 @@ import (
 
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+	"github.com/tmc/grpc-intro/apidocs"
 	"github.com/tmc/grpc-intro/protos/echoservice"
 
-	"github.com/tmc/grpc-websocket-proxy/wsproxy"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
@@ -34,16 +34,19 @@ func run() error {
 		return err
 	}
 
-	mux := runtime.NewServeMux()
+	gwMux := runtime.NewServeMux()
 	opts := []grpc.DialOption{grpc.WithInsecure()}
-	err := echoservice.RegisterEchoHandlerFromEndpoint(ctx, mux, *grpcAddr, opts)
+	err := echoservice.RegisterEchoHandlerFromEndpoint(ctx, gwMux, *grpcAddr, opts)
 	if err != nil {
 		return err
 	}
 	go http.ListenAndServe(*debugAddr, nil)
 	fmt.Println("listening")
-	http.ListenAndServe(*httpAddr, wsproxy.WebsocketProxy(mux))
-	return nil
+	mux := http.NewServeMux()
+	mux.Handle(apidocs.URLPrefixUI, apidocs.HandlerUI)
+	mux.Handle(apidocs.URLPrefix, apidocs.Handler)
+	//mux.Handle("/", wsproxy.WebsocketProxy(gwMux))
+	return http.ListenAndServe(*httpAddr, mux)
 }
 
 func listenGRPC(listenAddr string) error {

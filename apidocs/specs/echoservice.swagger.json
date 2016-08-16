@@ -1,0 +1,83 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "echoservice.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/echo": {
+      "get": {
+        "operationId": "Stream",
+        "responses": {
+          "200": {
+            "description": "(streaming responses)",
+            "schema": {
+              "$ref": "#/definitions/echoserviceEchoResponse"
+            }
+          }
+        },
+        "tags": [
+          "Echo"
+        ]
+      },
+      "post": {
+        "operationId": "Echo",
+        "responses": {
+          "200": {
+            "description": "(streaming responses)",
+            "schema": {
+              "$ref": "#/definitions/echoserviceEchoResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "(streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/echoserviceEchoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Echo"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "echoserviceEchoRequest": {
+      "type": "object",
+      "properties": {
+        "Message": {
+          "type": "string",
+          "format": "string"
+        }
+      }
+    },
+    "echoserviceEchoResponse": {
+      "type": "object",
+      "properties": {
+        "Message": {
+          "type": "string",
+          "format": "string"
+        }
+      }
+    },
+    "echoserviceEmpty": {
+      "type": "object"
+    }
+  }
+}
