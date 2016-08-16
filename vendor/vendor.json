@@ -3,6 +3,24 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "3eH5XenKCK28s5fpbAeQoPGT3D0=",
+			"path": "github.com/GeertJohan/go.rice",
+			"revision": "9fdfd46f9806a9228aae341d65ab75c5235c383c",
+			"revisionTime": "2016-08-11T09:34:08Z"
+		},
+		{
+			"checksumSHA1": "xECV8VmnSwtMPugLqB1OAXwOs48=",
+			"path": "github.com/GeertJohan/go.rice/embedded",
+			"revision": "9fdfd46f9806a9228aae341d65ab75c5235c383c",
+			"revisionTime": "2016-08-11T09:34:08Z"
+		},
+		{
+			"checksumSHA1": "8i+beEgcVf0q/I7lTqo2ERZM/OU=",
+			"path": "github.com/daaku/go.zipexe",
+			"revision": "a5fe2436ffcb3236e175e5149162b41cd28bd27d",
+			"revisionTime": "2015-03-29T02:31:25Z"
+		},
+		{
 			"checksumSHA1": "HmbftipkadrLlCfzzVQ+iFHbl6g=",
 			"path": "github.com/golang/glog",
 			"revision": "23def4e6c14b4da8ac2ed8007337bc5eb5007998",
@@ -55,6 +73,12 @@
 			"path": "github.com/grpc-ecosystem/grpc-gateway/utilities",
 			"revision": "5e0e028ba0a015710eaebf6e47af18812c9f2767",
 			"revisionTime": "2016-08-16T07:13:19Z"
+		},
+		{
+			"checksumSHA1": "g+afVQQVopBLiLB5pFZp/8s6aBs=",
+			"path": "github.com/kardianos/osext",
+			"revision": "c2c54e542fb797ad986b31721e1baedf214ca413",
+			"revisionTime": "2016-08-11T00:15:26Z"
 		},
 		{
 			"checksumSHA1": "P7vohgBr5bwgerpyhF99ea4tmwU=",
