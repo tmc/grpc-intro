@@ -14,6 +14,7 @@ import (
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/tmc/grpc-intro/apidocs"
 	"github.com/tmc/grpc-intro/protos/echoservice"
+	"github.com/tmc/grpc-websocket-proxy/wsproxy"
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -45,7 +46,7 @@ func run() error {
 	mux := http.NewServeMux()
 	mux.Handle(apidocs.URLPrefixUI, apidocs.HandlerUI)
 	mux.Handle(apidocs.URLPrefix, apidocs.Handler)
-	//mux.Handle("/", wsproxy.WebsocketProxy(gwMux))
+	mux.Handle("/", wsproxy.WebsocketProxy(gwMux))
 	return http.ListenAndServe(*httpAddr, mux)
 }
 

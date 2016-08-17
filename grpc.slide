@@ -1,0 +1,98 @@
+intro to gRPC
+opsen
+
+tmc
+@traviscline
+travis.cline@gmail.com
+
+* Definitions
+
+RPC - Russian Party Crackers
+
+Russian party crackers, or RPC, is a game usually played at celibratory events. 
+
+To play Russian party cracker's, you need to get 2 standard issue confetti style poppers. 
+Tie the 2 trigger strings together, then challenge your friend or colleague to a game of Russian party cracker's.
+
+Each contestant is to take the barrel of their popper and aim it at their face. Then on the count of three you pull your barrel or end, as you would with a traditional christmas cracker, and the victor is declared to be the one who's face is not covered in confetti.
+
+* Abstract
+
+A quick introduction to gRPC.
+
+* What is gRPC?
+
+.link http://grpc.io
+
+gRPC is an open source RPC library out of the goog.
+Based on http2.
+Efficient.
+Embraces streaming semantics.
+
+Ten languages: C, Java, Go, C++, Node.js, Python, Ruby, Objective-C, PHP, and C#
+IDL: *Proto3*
+Transport: *HTTP2*
+
+* Streaming RPC
+
+Extends the go channel semantics over a network.
+
+Unary RPC calls are just a subset of bi-di streaming calls.
+
+* gRPC users
+
+imported by over 800+ open source go packages: [[https://godoc.org/google.golang.org/grpc?importers][google.golang.org/grpc]] on [[http://godoc.org][godoc.org]]
+
+- Docker
+- Kubernetes
+- etcd
+- new Google cloud APIs
+
+* Why not JSON over HTTP?
+
+One of the unexpected costs at Uber was the initial convienience of weakly typed JSON strings over http.
+
+@mranney - "The first thing we need to is get type safe and verifiable interfaces between our components."
+
+Having typed payloads allows you to reason about service boundaries and contracts.
+
+* Drawbacks
+
+* Understanding traffic
+
+h2 - binary
+protobuf - binary
+no wireshark dissector (yet[[https://groups.google.com/forum/#!topic/grpc-io/jOs_eK7FKFA][*]])
+
+* Benefits
+
+* Tooling.
+
+Free instrumentation on a per-call basis: [[https://github.com/grpc-ecosystem/go-grpc-prometheus][go-grpc-prometheus]]
+Free distributed tracing: [[https://github.com/grpc-ecosystem/grpc-opentracing][grpc-opentracing]]
+Documentation: [[https://github.com/grpc-ecosystem/grpc-gateway][gen-grpc-swagger]]
+Backwards compat for HTTP 1.1 clients [[https://github.com/grpc-ecosystem/grpc-gateway][grpc-gateway]]
+
+* Demos and Code
+
+* Protocol definition
+
+.code protos/echoservice/echoservice.proto
+
+* Generating code
+
+.code protos/echoservice/Makefile
+
+* Generated code
+.code protos/echoservice/echoservice.pb.go /type EchoClient/,/^}/
+.code protos/echoservice/echoservice.pb.go /type EchoServer/,/^}/
+.code protos/echoservice/echoservice.pb.go /type EchoRequest/,/^}/
+.code protos/echoservice/echoservice.pb.go /type EchoResponse/,/^}/
+
+* Bonus
+
+Restore streaming semantics to dumb/browser clients with [[https://github.com/tmc/grpc-websocket-proxy][grpc-websocket-proxy]]
+
+Idiomatic client code generation: [[https://github.com/tmc/grpcutils][grpcutils/protoc-gen-flowtypes]]
+* ^D
+
